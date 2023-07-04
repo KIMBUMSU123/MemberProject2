@@ -1,0 +1,119 @@
+package day05;
+
+import java.util.Scanner;
+
+public class 배열예제 {
+
+	public static void main(String[] args) {
+//		int[] a = {23,14,15,16,4};
+		
+//		for(int i=0; i<a.length; i++) {
+//			if(i == a.length-1) {
+//				System.out.println(a[i]);
+//				break;
+//			}
+//			System.out.print(a[i]+",");
+//		}
+		
+		// a배열의 전체 합 출력
+//		int sum = 0;
+//		for(int i=0; i<a.length; i++) {
+//			sum += a[i];
+//		}
+//		System.out.println(sum);
+		
+//		Scanner sc = new Scanner(System.in);
+//		int[] b = new int[10]; //10칸짜리 int배열 만들기
+//		
+//		for(int i=0; i<b.length; i++) {
+//			System.out.print("b배열의 "+i+"번째 인덱스> ");
+//			b[i] = sc.nextInt();
+//			System.out.println(b.length+"b의 길이");
+//		}
+		
+		// b배열의 짝수번째 인덱스값만 출력
+//		for(int i=0; i<b.length; i++) {
+//			if(i % 2 == 0) {
+//				System.out.println(b[i]);
+//			}
+//		}
+		
+		// b배열의 값들중에 짝수값만 출력
+//		for(int i=0; i<b.length; i++) {
+//			if(b[i] % 2 == 0) {
+//				System.out.println(b[i]);
+//			}
+//		}
+//		int sum = 0;
+//		for(int i=0; i<b.length; i++) {
+//			if(b[i] % 2 != 0) {
+//				sum += b[i];
+//			}
+//		}
+//		System.out.println(sum);
+		
+		// b배열의 값들중에 3의배수의 합, 5의배수의 합, 3과5의배수의 합, 둘다아닌값의 합
+//		int sum3 = 0; // 3의배수의 합
+//		int sum5 = 0; // 5의배수의 합
+//		int sum35 = 0; // 3과5의배수의 합
+//		int sum = 0; // 둘다아닌값의 합
+		
+//		for(int i=0; i<b.length; i++) {
+//			if(b[i] % 3 == 0 && b[i] % 5 == 0) {
+//				sum35 += b[i];
+//			}
+//			if(b[i] % 3 == 0) {
+//				sum3 += b[i];
+//			}
+//			if(b[i] % 5 == 0) {
+//				sum5 += b[i];
+//			}
+//			if(b[i] % 3 != 0 && b[i] % 5 != 0) {
+//				sum += b[i];
+//			}
+//		}
+		
+//		for(int i=0; i<b.length; i++) {
+//			if(b[i] % 3 == 0 && b[i] % 5 == 0) {
+//				sum35 += b[i];
+//				sum3 += b[i];
+//				sum5 += b[i];
+//			}else if(b[i] % 3 == 0) {
+//				sum3 += b[i];
+//			}else if(b[i] % 5 == 0) {
+//				sum5 += b[i];
+//			}else {
+//				sum += b[i];
+//			}
+//		}
+		
+		// 0번 째 자리에 1 2 3 4번 값을 넣기
+		
+		int[] c = {2,3,4,7,10};
+		
+//		for(int i=1; i<c.length; i++) { // i=0으로 하면 0번 째 값을 추가하며 시작함
+//			c[0] = c[0] + c[i];
+////			c[0] += c[i];
+//		}
+		
+		// 배열의 값을 한 칸 씩 앞당기기
+		// c = { 3 4 7 10 2 }
+		
+		for(int i = 1; i<=0; i--) {
+			int t = c[0];
+			
+		}System.out.println(c);
+		
+		
+		
+		
+		System.out.println(c[0]);
+		
+		
+		
+		
+		
+		
+	}
+
+}

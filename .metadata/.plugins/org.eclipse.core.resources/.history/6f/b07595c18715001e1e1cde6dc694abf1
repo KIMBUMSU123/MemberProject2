@@ -1,0 +1,13 @@
+package day09;
+
+public class BoardMain {
+
+	public static void main(String[] args) {
+		//Board 객체 하나 만들기
+		Board a = new Board("이누야샤",30,true);
+		a.cntUp();
+		a.print();
+
+	}
+
+}

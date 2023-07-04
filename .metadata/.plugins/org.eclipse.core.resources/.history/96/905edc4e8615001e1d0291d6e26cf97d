@@ -1,0 +1,16 @@
+package day09;
+
+public class BoardMain {
+
+	public static void main(String[] args) {
+		//Board 객체 하나 만들기
+		Board b1 = new Board("아즈망가대왕", 30, false);
+		b1.getCnt()
+		b1.pr
+		//cntUp메서드 사용하기
+		//print메서드 사용하기
+		a.print();
+
+	}
+
+}

@@ -1,0 +1,19 @@
+package day05;
+
+import java.util.Scanner;
+
+public class 다시보기 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Scanner scanner = new Scanner(System.in);
+		
+		int[] b = new int[10]; // 10칸짜리 인덱스
+	
+		for(int i=0; i<b.length; i++) {
+			System.out.println("b배열의" +i+ "번째 인덱스");
+		}
+	}
+
+}

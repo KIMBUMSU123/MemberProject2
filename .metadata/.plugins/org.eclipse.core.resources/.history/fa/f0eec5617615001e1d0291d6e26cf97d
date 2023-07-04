@@ -1,0 +1,22 @@
+package day09;
+
+public class FruitMain {
+	
+	public static void main(String[] args) {
+		
+		Fruit apple = new Fruit();
+		apple.name = "사과";
+		apple.color="빨강";
+		apple.isseed = true;
+		apple.print();
+		Fruit banana = new Fruit("바나나","노랑",false);
+		banana.print();
+		
+		Fruit melon = new Fruit();
+		if(melon.name.equals("멜론")) {
+			System.out.println("멜론객체입니다");
+		}else {
+			System.out.println("멜론이 아니비다");
+	}
+
+}

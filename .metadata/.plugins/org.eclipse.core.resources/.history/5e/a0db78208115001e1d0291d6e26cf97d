@@ -1,0 +1,14 @@
+package day09;
+
+public class PeopleMain {
+
+	public static void main(String[] args) {
+		People a = new People();
+		a.setName("이수정");
+		a.setage(27);
+		a.print();
+		
+		People hong(String name, int age) {*9
+	}
+
+}

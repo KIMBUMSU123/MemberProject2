@@ -1,0 +1,68 @@
+package day11;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class UserMain {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		List<User> list = new ArrayList<User>();
+		while (true) {
+			System.out.println("========회원가입 시스템=========");
+			System.out.println("1.회원가입 2.로그인 3.리스트 0.종료");
+			System.out.print("메뉴선택 : ");
+			int menu = sc.nextInt();
+
+			if (menu == 1) {
+				System.out.print("회원가입을 시작합니다.");
+				User user = new User();
+				System.out.print("회원가입 할 이름을 입력하세요 : ");
+				user.setName(sc.next());
+				System.out.print("회원가입 할 ID를 입력하세요 : ");
+				user.setId(sc.next());
+				System.out.print("회원가입 할 PW를 입력하세요 : ");
+				user.setPw(sc.next());
+				list.add(user);
+				System.out.println(user.getName() + "님 회원가입 완료!!");
+
+			} else if (menu == 2) {
+				System.out.println("로그인을 합니다.");
+				System.out.print("로그인할 아이디를 입력하세요 : ");
+				String logId = sc.next();
+				System.out.print("로그인할 비밀번호를 입력하세요 : ");
+				String logPw = sc.next();
+				boolean find = false;
+
+				for (int i = 0; i < list.size(); i++) {
+					if (logId.equals(list.get(i).getId())) {
+						find = true;
+						if (logPw.equals(list.get(i).getPw())) {
+							System.out.println("로그인이 되었습니다.");
+						}
+
+					}
+				}
+				if (!find) {
+					System.out.println("존재하지 않는 아이디 입니다.");
+				}
+			} else if (menu == 3) {
+				System.out.println("============================");
+				System.out.println("이름\t아이디\t비밀번호");
+				for (int i = 0; i < list.size(); i++) {
+					list.get(i).print();
+				}
+
+			} else if (menu == 0) {
+				System.out.println("종료합니다.");
+				break;
+			} else {
+				System.out.println("다시입력하세요");
+			}
+			System.out.println("");
+		}
+		System.out.println("프로그램종료!");
+	}
+
+}

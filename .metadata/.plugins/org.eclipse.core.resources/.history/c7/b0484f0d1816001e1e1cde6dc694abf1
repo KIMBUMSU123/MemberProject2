@@ -1,0 +1,8 @@
+package day10;
+
+public class Animal {
+	String name;
+	String sound;
+	int leg;
+
+}

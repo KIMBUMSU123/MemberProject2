@@ -1,0 +1,22 @@
+package day09;
+
+public class PeopleMain {
+
+	public static void main(String[] args) {
+		People a = new People();
+		a.setName("이수정");
+		a.setage(27);
+		a.print();
+		
+		People b = new People();
+		b.setName("dong");
+		b.setage(65);
+		b.ageUp();
+		b.print();
+		
+		
+		
+		
+	}
+
+}

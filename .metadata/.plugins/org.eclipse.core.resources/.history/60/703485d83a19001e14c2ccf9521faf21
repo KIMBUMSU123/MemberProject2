@@ -1,0 +1,13 @@
+package ex01;
+
+public class Main {
+
+	public static void main(String[] args) {
+		//변수타입
+		int num1=80;
+		float num2=80.5f;
+		double num3=80.5;
+
+	}
+
+}

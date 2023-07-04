@@ -1,0 +1,25 @@
+package day10;
+
+public class Fruit {
+	String name;
+	String color;
+	boolean isSeed;
+	
+	public Fruit() {
+		System.out.println("첫번째 생성자");
+	
+	}
+	public Fruit(String name) {
+		System.out.println("두번째 생성자");
+	}
+	public Fruit(String name, String color) {
+		System.out.println("세번째 생성자");
+	
+	}
+	public Fruit(String name, String color, boolean isSeed) {
+		System.out.println("네번째 생성자");
+	}
+	public void() {
+		System.out.println(name+color+);
+	}
+}

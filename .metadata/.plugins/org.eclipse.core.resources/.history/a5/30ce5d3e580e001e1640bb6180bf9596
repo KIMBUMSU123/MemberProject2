@@ -1,0 +1,23 @@
+package day02;
+
+public class 반복운_for {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		// 반복문 for
+		// for(변수선언; 조건; 증감;)
+//		for(int i=10; i<=20; i++) { // i가 5보다 작은 동안 반복해라 // i++ 좌와 우는 같다 i = i+1
+//			System.out.println("안녕하세요");
+//		}
+		
+		for(int i=0; i<10; i++) {
+			System.out.println(i);
+		}
+		
+		
+		
+		
+	}
+
+}

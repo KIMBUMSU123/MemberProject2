@@ -1,0 +1,52 @@
+package day09;
+
+public class Board {
+	private String title;
+	private int cnt;
+	private boolean open;
+	
+	public Board(String title, int cnt, boolean open) {
+		this.title = title;
+		this.cnt = cnt;
+		this.open = open;
+	}
+	// 메서드 (get/set)
+	public String getTitle() {
+		return title;
+	}
+	public void setTitel(String title) {
+		this.title = title;
+	}
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+	public boolean getOpen() {
+		return open;
+	}
+	public void setOpen(boolean open) {
+		this.open = open;
+	}
+	public int cntUp1(int a) {
+		return cnt += a;
+	}
+	
+	
+	
+	//
+	public void cntUp() {
+		cnt++;
+	}
+	public int cntUp(int a) {
+		return cnt += a;
+	
+		//
+		
+		public void print() {
+			System.out.println(title+"\t"+cnt+"\t"+open);
+		}
+		
+	}
+}

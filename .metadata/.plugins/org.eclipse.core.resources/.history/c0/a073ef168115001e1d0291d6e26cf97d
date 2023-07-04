@@ -1,0 +1,15 @@
+package day09;
+
+public class PeopleMain {
+
+	public static void main(String[] args) {
+		People p = new People();
+		
+		p.setname("이수정");
+		p.setage(27);
+		p.print();
+		
+		People girdong(String name, int age) {
+	}
+
+}

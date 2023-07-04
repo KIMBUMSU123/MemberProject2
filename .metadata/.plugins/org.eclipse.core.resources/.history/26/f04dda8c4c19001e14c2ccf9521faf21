@@ -1,0 +1,32 @@
+package ex01;
+
+import java.util.Scanner;
+
+public class Dimension {
+	public static void run() {
+		String[] name=new String[22];
+		String[] address=new String[22];
+		
+		Scanner s=new Scanner(System.in);
+		boolean run=true;
+		while(run) {
+			System.out.println("---------------------------");
+			System.out.println("1.주소등록 | 2.주소목록 | 0.종료");
+			System.out.println("---------------------------");
+			System.out.println("선택>");
+			String menu=s.nextLine();
+			switch(menu) {
+			case "0":
+				run=false;
+				System.out.println("프로그램을 종료합니다.");
+				break;
+			case "1":
+				break;
+			case "2":
+				break;
+			default:
+				System.out.println("메뉴를 다시선택하세요!");
+			}
+		}
+	}
+}

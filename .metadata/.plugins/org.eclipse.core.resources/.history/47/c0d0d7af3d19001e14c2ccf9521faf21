@@ -1,0 +1,13 @@
+package ex01;
+
+public class Operation {
+	public static void run() {
+		//산술연산자
+		int kor=90;
+		int eng=88;
+		int mat=76;
+		int sum=kor + eng + mat;
+		double avg=sum/3;
+	}
+
+}

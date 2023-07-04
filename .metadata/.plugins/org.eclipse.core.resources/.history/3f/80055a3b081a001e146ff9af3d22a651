@@ -1,0 +1,33 @@
+package ex02;
+import java.util.*;
+
+public class Sungjuk {
+	public static void run() {
+		Scanner s=new Scanner(System.in);
+		
+		boolean run=true;
+		while
+		System.out.println("\n\n******* 성적관리 ***********************");
+		System.out.println("--------------------------------------");
+		System.out.println("1.입력 |2.조회 |3.목록 4.수정 |5.삭제 |0.종료");
+		System.out.println("---------------------------------------");
+		System.out.print("선택>");
+		String menu=s.nextLine();
+		switch(menu) {
+			case "0":
+				run=false;
+				System.out.println();("프로그램이 종료됩니다!");
+				break;
+			case "1":
+				break;
+			case "2":
+				break;
+			case "3":
+				break;
+			case "4":
+				break;
+			case "5":
+				break;
+		}
+	}
+}
