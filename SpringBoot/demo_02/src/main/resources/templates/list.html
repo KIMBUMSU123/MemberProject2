@@ -16,7 +16,7 @@
 
     <tr th:each="student: ${studentList}">
         <td>
-            <a th:href="@{|/student/${student.id}|}" th:text="${student.id}"></a>
+            <a th:href="@{|/student/${student.id}|}" th:text="${student.id}"></a>   <!-- 링크를 줄때 사용-->
         </td>
         <td th:text="${student.id}"></td>
         <td th:text="${student.studentNumber}"></td>
