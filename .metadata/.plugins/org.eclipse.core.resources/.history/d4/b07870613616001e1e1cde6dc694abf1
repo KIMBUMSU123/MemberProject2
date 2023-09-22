@@ -1,9 +1,0 @@
-package day10;
-
-public class Student {
-	String no; // 학번
-	String name; // 이름
-	String dept; // 학과
-	int year; // 학년
-
-}

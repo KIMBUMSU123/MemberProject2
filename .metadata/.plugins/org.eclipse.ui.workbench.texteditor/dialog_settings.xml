@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="안"/>
+		<item key="selection" value="search"/>
 		<list key="findhistory">
+			<item value="search"/>
 			<item value="안"/>
 			<item value="돌"/>
 			<item value="흙"/>

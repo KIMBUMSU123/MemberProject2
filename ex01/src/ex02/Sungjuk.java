@@ -79,7 +79,7 @@ public class Sungjuk {
 					System.out.println(delete + "학생이없습니다.");
 				}else {
 					array.remove(score);
-					System.out.println("삭제완료!");
+					System.out.println("삭제완료!"); 
 				}
 
 				break;
