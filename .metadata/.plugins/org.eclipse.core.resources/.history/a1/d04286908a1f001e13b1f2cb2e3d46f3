@@ -1,0 +1,24 @@
+package ex08;
+
+import java.sql.*;
+
+public class AccountDAO {
+	Connection con=Database.connect();
+	
+	//계좌정보조회
+	public AccountVO read(int ano) {
+		AccountVO vo=new AccountVO();
+		String sql="SELECT * FROM ACCOUNT WHERE ANO=?";
+		PreparedStatement ps=con.prepareStatement(sql);
+		ps.setInt(1, ano);
+		ResultSet rs=ps.executeQuery();
+		if(rs.next()) {
+			vo.setAno(rs.getInt("ano"));
+			vo.setAname(rs.getString("aname"));
+			vo.setBalance(rs.getInt("balance"));
+		}
+		
+		return vo;
+	}
+
+}

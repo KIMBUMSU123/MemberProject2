@@ -1,0 +1,10 @@
+package ex08;
+
+public class AccountVO {
+	private int ano;
+	private String aname;
+	private int balance;
+	
+	
+
+}

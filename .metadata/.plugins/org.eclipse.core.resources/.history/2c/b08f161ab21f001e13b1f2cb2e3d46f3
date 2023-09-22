@@ -1,0 +1,125 @@
+package ex08;
+
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		AccountDAO adao=new AccountDAO();
+		DetailDAO ddao=new DetailDAO();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		DecimalFormat df=new DecimalFormat("#,###원");
+		
+		boolean run = true;
+		while (run) {
+			System.out.println("\n\n******* 계좌관리 *****************************");
+			System.out.println("--------------------------------------------");
+			System.out.println("1.계좌생성 |2.계좌조회 |3.입금 |4.출금 |0.종료");
+
+			System.out.println("--------------------------------------------");
+			System.out.print("선택>");
+			String menu = sc.nextLine();
+			switch (menu) {
+			case "0":
+				run = false;
+				System.out.println("프로그램을 종료합니다!");
+				break;
+			case "1":
+				System.out.println("계좌주명>");
+				String name=sc.nextLine();
+				if(name=="") break;
+				
+				AccountVO acc=new AccountVO();
+				acc.setAname(name);
+				
+				int balance=input("초기입금액");
+				if(balance==0) break;
+				
+				acc.setBalance(balance);
+				System.out.println("새로운 계좌를 생성하실래요?(예:y)?");
+				String sel=sc.nextLine();
+				if(sel.equals("Y") || sel.equals("y") || sel.equals("ㅛ")) {
+					int newano=adao.insert(acc);
+					System.out.println(newano + "번 새로운 계좌가 생성되었습니다.");
+					//거래내역저장
+					DetailVO dvo=new DetailVO();
+					dvo.setAno(newano);
+					dvo.setAmount(balance);
+					dvo.setType("입금");
+				}
+				
+				break;
+			case "2":
+				int ano = input("\n조회할 계좌번호:");
+				if (ano == 0) {
+					System.out.println("조회를 종료합니다.");
+				} else {
+					try {
+						AccountVO vo = adao.read(ano);
+						if (vo.getAname() == null) {
+							System.out.println("해당계좌가 존재하지않습니다");
+						} else {
+							System.out.println("계좌주: " + vo.getAname());
+							System.out.println("잔액:" + df.format(vo.getBalance()));
+							System.out.println("--------------------------------------------");
+							System.out.println("거래번호\t\t금액\t입출금\t날짜");
+							System.out.println("--------------------------------------------");
+							for (DetailVO v : ddao.list(ano)) {
+								System.out.printf("%d\t%10s\t%s\t%s\n", v.getDno(), df.format(v.getAmount()),
+										v.getType(), sdf.format(v.getDdate()));
+							}
+						}
+					} catch (Exception e) {
+						System.out.println("계좌조회오류" + e.toString());
+					}
+				}
+				break;
+			case "3":
+				ano=input("입금계좌번호");
+				if(ano==0) {
+					System.out.println("입금을 취소합니다.");
+				}else {
+					try {
+						AccountVO acc1=adao.read(ano);
+						if(acc1.getAname()==null) {
+							System.out.println("해당 계좌가 존재하지 않습니다.");
+						}else {
+							System.out.println("계좌주:"+acc1.getAname());
+						}
+					} catch (Exception e) {
+						System.out.println("조회오류:"+e.toString());
+					}
+				}
+				break;
+			case "4":
+				break;
+			case "5":
+				for(AccountVO vo:adao.list()) {
+					System.out.printf("%d\t%s\t%s\n", vo.getAno(), vo.getAname(), df.format(vo.getBalance()));
+				}
+				break;
+			default:
+				System.out.println("메뉴를 다시선택하세요!");
+				break;
+			}
+
+		}
+	}
+	//숫자인지 체크하는 메서드 
+		public static int input(String title) {
+			Scanner s=new Scanner(System.in);
+			while(true) {
+				System.out.println(title+">");
+				String str=s.nextLine();
+				try {
+					if(str=="") return 0;
+					else return Integer.parseInt(str);
+			}catch(Exception e) {
+				System.out.println("숫자를 입력하세요!");
+			}
+		}
+}
+}
