@@ -29,9 +29,10 @@
     </tr>
 </table>
 </body>
-<script>
+<script th:inline="javascript">
     const detail = (id) => {
-        location.href = `/student/\${id}`;
+        location.href = `/student/${id}`;
+        // location.href = "/student/" + id;
     }
 
 </script>
