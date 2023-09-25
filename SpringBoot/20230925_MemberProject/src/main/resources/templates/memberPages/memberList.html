@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>id</th>
+        <th>학번</th>
+        <th>이름</th>
+        <th>학과</th>
+        <th>전화번호</th>
+    </tr>
+
+    <tr th:each="student: ${studentList}">
+        <td>
+            <a th:href="@{|/student/${student.id}|}" th:text="${student.id}"></a>   <!-- 링크를 줄때 사용-->
+        </td>
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.studentNumber}"></td>
+        <td th:text="${student.studentName}"></td>
+        <td th:text="${student.studentMajor}"></td>
+        <td th:text="${student.studentMobile}"></td>
+        <td>
+           <button th:onclick="detaile([[${student.id}]])">조회</button>
+        </td>
+    </tr>
+</table>
+</body>
+<script th:inline="javascript">
+    const detail = (id) => {
+        location.href = `/student/${id}`;
+        // location.href = "/student/" + id;
+    }
+
+</script>
+</html>

@@ -43,9 +43,9 @@ public class MemberController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
-        boolean loginResult = memberService.login(memberDTO);
-        if (loginResult) {
-            session.setAttribute("loginEmail", memberDTO.getMemberEmail());
+        MemberDTO loginResult = memberService.login(memberDTO);
+        if (loginResult !=null) {
+            session.setAttribute("loginName", loginResult);
             return "memberPages/memberMain";
         } else {
             return "memberPages/memberLogin";

@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter(AccessLevel.PRIVATE)
-@Table(name = "member_table")
+@Table(name="member_table")
 public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

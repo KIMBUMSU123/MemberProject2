@@ -18,10 +18,12 @@ public class MemberService {
 
     public Long save(MemberDTO memberDTO) {
         MemberEntity memberEntity = MemberEntity.toSaveEntity(memberDTO);
-        return memberRepository.save(memberEntity).getId();
+        Long id = memberRepository.save(memberEntity).getId();
+        System.out.println("id = " + id);
+        return id;
     }
 
-    public boolean login(MemberDTO memberDTO) {
+    public MemberDTO login(MemberDTO memberDTO) {
         /*
             DB에서 로그인하는 사용자의 이메일로 조회한 결과를 가져와서
             비밀번호가 일치하는지 비교한 뒤 로그인 성공 여부를 판단
@@ -39,10 +41,11 @@ public class MemberService {
         Optional<MemberEntity> optionalMemberEntity =
                 memberRepository.findByMemberEmailAndMemberPassword(memberDTO.getMemberEmail(), memberDTO.getMemberPassword());
         if (optionalMemberEntity.isPresent()) {
-//            MemberEntity memberEntity = optionalMemberEntity.get();
-            return true;
+            MemberEntity memberEntity = optionalMemberEntity.get(); // optional안에있는 Entity를 사용하기 위해 벗겨내는 역할
+            MemberDTO loginDTO = MemberDTO.toDTO(memberEntity);     // 벗겨낸 entity의 값을 DTO로 바꿔 DTO를 저장
+            return loginDTO;
         } else {
-            return false;
+            return null;
         }
 
 
@@ -62,7 +65,7 @@ public class MemberService {
 //            studentDTOList.add(studentDTO);                                     // 변환된 값을 studentList에 저장
 //        }
         memberEntityList.forEach(entity ->{
-            memberDTOList.add(MemberDTO.toSaveDTO(entity));
+            memberDTOList.add(MemberDTO.toDTO(entity));
         } );
         return memberDTOList;                                                  // 값을 리턴
 

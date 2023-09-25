@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <th:block th:replace="~{component/config :: config}"></th:block>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<div th:replace="~{component/header :: header}"></div>
+<div th:replace="~{component/nav :: nav}"></div>
 <a href="/member/save">회원가입</a>
 <a href="/member/login">로그인</a>
 <a href="/members">회원목록</a>
+<div th:replace="~{component/footer :: footer}"></div>
 </body>
 </html>

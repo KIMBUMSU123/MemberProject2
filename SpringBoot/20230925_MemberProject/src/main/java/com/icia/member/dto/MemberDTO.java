@@ -16,7 +16,7 @@ public class MemberDTO {
     private String memberBirth;
     private String memberMobile;
 
-    public static MemberDTO toSaveDTO(MemberEntity memberEntity) {
+    public static MemberDTO toDTO(MemberEntity memberEntity) {
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setMemberEmail(memberEntity.getMemberEmail());
         memberDTO.setMemberPassword(memberEntity.getMemberPassword());
