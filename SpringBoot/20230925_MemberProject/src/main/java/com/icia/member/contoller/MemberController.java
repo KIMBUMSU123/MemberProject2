@@ -39,19 +39,29 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(@RequestParam(value = "redirectURI",defaultValue = "/member/mtpage")String redirectURI, Model model) {
+        model.addAttribute("redirectURI" , redirectURI);
         return "memberPages/memberLogin";
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+    public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session,
+                        @RequestParam("redirectURI") String redirectURI) {
         MemberDTO loginResult = memberService.login(memberDTO);
         if (loginResult != null) {
             session.setAttribute("loginName", loginResult);
-            return "memberPages/memberMain";
+//            return "memberPages/memberMain";
+            // 사용자가 로그인 성공하면, 직전에 요청한 페이지로 이동시킴.
+            //별도로 요청한 페이지가 없다면 정상적으로 myPage로 이동시킴 .(redirect:/member/mypage)
+            return "redirect:" +redirectURI;
         } else {
             return "memberPages/memberLogin";
         }
+    }
+
+    @GetMapping("/mypage")
+    public String myPage(){
+        return "memberPages/memberMain";
     }
 
     // /member
@@ -109,5 +119,18 @@ public class MemberController {
         memberService.update(memberDTO);
         session.removeAttribute("loginEmail");
         return "memberPages/memberLogin";
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody MemberDTO memberDTO, HttpSession session){
+        memberService.update(memberDTO);
+        session.removeAttribute("loginEmail");
+        return  new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable("id")Long id){
+        memberService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
