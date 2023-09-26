@@ -4,7 +4,11 @@ import com.icia.member.dto.MemberDTO;
 import com.icia.member.entity.MemberEntity;
 import com.icia.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,22 +56,38 @@ public class MemberService {
     }
 
     public List<MemberDTO> findAll() {
-        // 리스트를 호출을 하여 StudentEntity의 내용을 전부 출력
         List<MemberEntity> memberEntityList = memberRepository.findAll();
-//        리스트에 DTO값을 studentDTOList에 저장
         List<MemberDTO> memberDTOList = new ArrayList<>();
-        /*
-            List<StudentEntity> -> List<StudentDTO>로 옮겨 담는 코드 작성
-            Entity -> 변환하는 메서드는 DTO에 정의
-         */
-//        for(StudentEntity studentEntity : studentEntityList){                   // for each 문으로 studentDTOList의 StudentEntity를 호출을 해서 studentEntity로 지정한 후
-//            StudentDTO studentDTO = StudentDTO.toSaveDTO(studentEntity);        // StudentDTO를 만들어서 Entity를 DTO로 변환해주는 메서드를 사용
-//            studentDTOList.add(studentDTO);                                     // 변환된 값을 studentList에 저장
-//        }
-        memberEntityList.forEach(entity ->{
-            memberDTOList.add(MemberDTO.toDTO(entity));
-        } );
-        return memberDTOList;                                                  // 값을 리턴
+        for (MemberEntity memberEntity: memberEntityList) {
+//            MemberDTO memberDTO = MemberDTO.toDTO(memberEntity);
+//            memberDTOList.add(memberDTO);
+            // 한줄로
+            memberDTOList.add(MemberDTO.toDTO(memberEntity));
+        }
+        return memberDTOList;
+    }
 
+    public MemberDTO findById(Long id) {
+        MemberEntity memberEntity = memberRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
+        return MemberDTO.toDTO(memberEntity);
+    }
+
+    public boolean emailCheck(String memberEmail) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(memberEmail);
+        if (optionalMemberEntity.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public MemberDTO findByMemberEmail(String memberEmail) {
+        MemberEntity memberEntity =  memberRepository.findByMemberEmail(memberEmail).orElseThrow(() -> new NoSuchElementException());
+        return MemberDTO.toDTO(memberEntity);
+    }
+
+    public void update(MemberDTO memberDTO) {
+    MemberEntity memberEntity = MemberEntity.toUpdateEntity(memberDTO);
+    memberRepository.save(memberEntity);
     }
 }

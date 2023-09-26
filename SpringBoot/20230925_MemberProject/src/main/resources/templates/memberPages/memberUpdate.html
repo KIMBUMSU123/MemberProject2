@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{component/config :: config}"></th:block>
+</head>
+<body>
+<div th:replace="~{component/header :: header}"></div>
+<div th:replace="~{component/nav :: nav}"></div>
+
+<div class="container">
+    <!-- 화면에 보여질 내용이 들어갈 부분 -->
+    <form action="text" method="post" name="updateForm">
+        <input type="text" name="id" th:value="${member.id}">
+        <input type="text" class="form-control" name="memberEmail" placeholder="이메일" th:value="${member.memberEmail}"><br>
+        <input type="text" name="memberPassword" placeholder="비밀번호"><br>
+        <input type="text" name="memberName" placeholder="이름" th:value="${member.memberName}"><br>
+        <input type="date" name="memberBirth" th:value="${member.memberBirth}"><br>
+        <input type="text" name="memberMobile" placeholder="전화번호" th:value="${member.memberMobile}"><br>
+        <input type="button" value="수정" onclick="member_update()">
+
+
+    </form>
+
+</div>
+
+<div th:replace="~{component/footer :: footer}"></div>
+
+</body>
+<script th:inline="javascript">
+    const member_update = () => {
+        const passDB = [[${member.memberPassword}]];
+        const passInput = document.querySelector('[name= "memberPassword"]').value;
+        const  id = document.querySelector('[name="id"]').value;
+        const  name = document.querySelector('[name="memberName"]').value;
+        const  birth = document.querySelector('[name="memberBrith"]').value;
+        const  email = document.querySelector('[name="memberEmail"]').value;
+        const  mobile= document.querySelector('[name="memberMobile"]').value;
+
+        if (passDB == passInput){
+            // document.updateForm.submit();
+            axios({
+                method: "put",//get은 RequestBody 사용이 불가능
+                url:`/member/${id}`,
+                data:{
+                    id:id,
+                    memberEmail: email,
+                    memberPassword: passInput,
+                    memberName:name,
+                    memberBirth:birth,
+                    memberMobile:mobile
+                }
+            }).then({
+
+            }).catch({
+
+            })
+        }else {
+            alert("비밀번호가 일치하지않습니다.");
+        }
+    }
+</script>
+</html>

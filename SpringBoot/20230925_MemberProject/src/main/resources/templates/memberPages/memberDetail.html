@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{component/config :: config}"></th:block>
+</head>
+<body>
+<div th:replace="~{component/header :: header}"></div>
+<div th:replace="~{component/nav :: nav}"></div>
+
+<div class="container">
+    <table class="table table-hover">
+        <tr>
+            <th>id</th>
+            <td th:text="${member.id}"></td>
+        </tr>
+        <tr>
+            <th>email</th>
+            <td th:text="${member.memberEmail}"></td>
+        </tr>
+        <tr>
+            <th>name</th>
+            <td th:text="${member.memberName}"></td>
+        </tr>
+        <tr>
+            <th>birth</th>
+            <td th:text="${member.memberBirth}"></td>
+        </tr>
+        <tr>
+            <th>mobile</th>
+            <td th:text="${member.memberMobile}"></td>
+        </tr>
+    </table>
+</div>
+
+<div th:replace="~{component/footer :: footer}"></div>
+
+</body>
+<script th:inline="javascript">
+    const member_detail = (id) => {
+        location.href = `/member/${id}`;
+    }
+    const member_delete = (id) => {
+        location.href = `/member/delete/${id}`;
+    }
+</script>
+</html>
