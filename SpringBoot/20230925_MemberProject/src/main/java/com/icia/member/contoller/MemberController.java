@@ -27,8 +27,8 @@ public class MemberController {
 
     @PostMapping("/save")
     public String save(@ModelAttribute MemberDTO memberDTO) {
-        memberService.save(memberDTO);
-        return "memberPages/memberLogin";
+            memberService.save(memberDTO);
+            return "memberPages/memberLogin";
     }
 
     @GetMapping("/list")

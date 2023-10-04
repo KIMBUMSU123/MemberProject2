@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Setter(AccessLevel.PRIVATE)
+@Setter(AccessLevel.PRIVATE) // 기본생성자를 막아주는 역할을 함
 @Table(name="member_table")
 public class MemberEntity {
     @Id
