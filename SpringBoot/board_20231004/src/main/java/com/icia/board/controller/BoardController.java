@@ -26,7 +26,7 @@ public class BoardController {
     public String save(@ModelAttribute BoardDTO boardDTO){
         //@ModelAttribute : html에서 입력된 값을 불러와 BoardDTO에 값을 집어 넣어 사용을 하겠다.
         boardService.save(boardDTO);
-        return "boardPages/boardList";
+        return "redirect:/board";
     }
     // 게시판 목록을 조회하고, 뷰에 데이터를 전달하는 핸들러
     @GetMapping
