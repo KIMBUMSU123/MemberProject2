@@ -1,5 +1,6 @@
 package com.icia.board.dto;
 
+import com.icia.board.entity.BaseEntity;
 import com.icia.board.entity.BoardEntity;
 import com.icia.board.utill.UtilClass;
 import lombok.Getter;

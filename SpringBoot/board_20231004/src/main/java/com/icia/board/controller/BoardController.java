@@ -18,13 +18,13 @@ public class BoardController {
 
     @GetMapping("/save")
     public String saveform(){
-        return "/boardPages/memberSave";
+        return "boardPages/boardSave";
     }
     @PostMapping("/save")
     public String save(@ModelAttribute BoardDTO boardDTO){
         //@ModelAttribute : html에서 입력된 값을 불러와 BoardDTO에 값을 집어 넣어 사용을 하겠다.
         boardService.save(boardDTO);
-        return "/boardPages/memberList";
+        return "boardPages/boardList";
     }
     @GetMapping
     public String findAll(Model model) {

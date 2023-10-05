@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter(AccessLevel.PRIVATE) // 기본생성자를 막아주는 역할을 함
 @Table(name="board_table")
-public class BoardEntity {
+public class BoardEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
