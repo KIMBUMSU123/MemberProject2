@@ -31,9 +31,16 @@ public class BoardService {
     }
 
     public Page<BoardDTO> findAll(int page) {
+        // 페이지 번호를 0부터 시작하도록 조정합니다.
         page = page - 1;
+
+        // 페이지당 항목 수를 정의합니다.
         int pageLimit = 5;
+
+        // 게시판 엔티티를 페이지네이션하여 가져옵니다.
         Page<BoardEntity> boardEntities = boardRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id")));
+
+        // 게시판 엔티티를 게시판 데이터 전송 객체(DTO)로 변환합니다.
         Page<BoardDTO> boardList = boardEntities.map(boardEntity ->
                 BoardDTO.builder()
                         .id(boardEntity.getId())
@@ -42,8 +49,11 @@ public class BoardService {
                         .boardHits(boardEntity.getBoardHits())
                         .createdAt(UtilClass.dateTimeFormat(boardEntity.getCreatedAt()))
                         .build());
+
+        // 변환된 게시판 데이터 전송 객체를 반환합니다.
         return boardList;
     }
+
 
     /**
      * 서비스 클래스 메서드에서 @Transactional 붙이는 경우
