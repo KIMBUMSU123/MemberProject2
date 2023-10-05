@@ -3,6 +3,7 @@ package com.icia.board.service;
 import com.icia.board.dto.BoardDTO;
 import com.icia.board.entity.BoardEntity;
 import com.icia.board.repository.BoardRepository;
+import com.icia.board.utill.UtilClass;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,10 +31,18 @@ public class BoardService {
     }
 
     public Page<BoardDTO> findAll(int page) {
+        page = page - 1;
         int pageLimit = 5;
         Page<BoardEntity> boardEntities = boardRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id")));
-
-        return null;
+        Page<BoardDTO> boardList = boardEntities.map(boardEntity ->
+                BoardDTO.builder()
+                        .id(boardEntity.getId())
+                        .boardTitle(boardEntity.getBoardTitle())
+                        .boardWriter(boardEntity.getBoardWriter())
+                        .boardHits(boardEntity.getBoardHits())
+                        .createdAt(UtilClass.dateTimeFormat(boardEntity.getCreatedAt()))
+                        .build());
+        return boardList;
     }
 
     /**
