@@ -3,6 +3,7 @@ package com.icia.board.controller;
 import com.icia.board.dto.BoardDTO;
 import com.icia.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,11 +29,25 @@ public class BoardController {
         boardService.save(boardDTO);
         return "redirect:/board";
     }
+    /*
+         rest api
+         /board/10 => 10번글
+         /board/20 => 20번글
+         /member/5 => 5번회원
+
+         3페이지에 있는 15번글
+         /board/3/15
+         /board/15?page=3
+    */
+
+
     // 게시판 목록을 조회하고, 뷰에 데이터를 전달하는 핸들러
     @GetMapping
-    public String findAll(Model model) {
+    public String findAll(Model model,
+                          @RequestParam(value ="page", required = false,defaultValue = "1")int page){
+
         // 게시판 서비스를 통해 모든 게시판 데이터를 가져옵니다.
-        List<BoardDTO> boardDTOList = boardService.findAll();
+        Page<BoardDTO> boardDTOList = boardService.findAll(page);
 
         // 모델에 "boardList"라는 이름으로 게시판 목록 데이터를 추가합니다.
         model.addAttribute("boardList", boardDTOList);

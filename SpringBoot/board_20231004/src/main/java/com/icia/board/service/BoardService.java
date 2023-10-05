@@ -4,7 +4,10 @@ import com.icia.board.dto.BoardDTO;
 import com.icia.board.entity.BoardEntity;
 import com.icia.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,17 +29,11 @@ public class BoardService {
         return boardRepository.save(boardEntity).getId();
     }
 
-    public List<BoardDTO> findAll() {
-        // 게시물을 ID 역순으로 정렬하여 모든 게시물을 조회합니다.
-        List<BoardEntity> boardEntityList = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+    public Page<BoardDTO> findAll(int page) {
+        int pageLimit = 5;
+        Page<BoardEntity> boardEntities = boardRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id")));
 
-        // 조회된 BoardEntity를 BoardDTO로 변환하고 리스트에 추가합니다.
-        List<BoardDTO> boardDTOList = new ArrayList<>();
-        boardEntityList.forEach(board -> {
-            boardDTOList.add(BoardDTO.toDTO(board));
-        });
-
-        return boardDTOList;
+        return null;
     }
 
     /**
