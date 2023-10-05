@@ -44,15 +44,21 @@ public class BoardController {
     // 게시판 목록을 조회하고, 뷰에 데이터를 전달하는 핸들러
     @GetMapping
     public String findAll(Model model,
-                          @RequestParam(value ="page", required = false,defaultValue = "1")int page){
-
-        // 게시판 서비스를 통해 모든 게시판 데이터를 가져옵니다.
+                          @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
         Page<BoardDTO> boardDTOList = boardService.findAll(page);
-
-        // 모델에 "boardList"라는 이름으로 게시판 목록 데이터를 추가합니다.
         model.addAttribute("boardList", boardDTOList);
+        // 목록 하단에 보여줄 페이지 번호
+        int blockLimit = 3;
+        int startPage = (((int) (Math.ceil((double) page / blockLimit))) - 1) * blockLimit + 1;
+        int endPage = ((startPage + blockLimit - 1) < boardDTOList.getTotalPages()) ? startPage + blockLimit - 1 : boardDTOList.getTotalPages();
+//        if ((startPage + blockLimit - 1) < boardDTOList.getTotalPages()) {
+//            endPage = startPage + blockLimit - 1;
+//        } else {
+//            endPage = boardDTOList.getTotalPages();
+//        }
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
 
-        // "boardPages/boardList" 뷰로 이동합니다.
         return "boardPages/boardList";
     }
 
