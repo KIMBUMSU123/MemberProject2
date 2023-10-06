@@ -4,6 +4,7 @@ import com.icia.board.entity.BaseEntity;
 import com.icia.board.entity.BoardEntity;
 import com.icia.board.utill.UtilClass;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,6 +22,11 @@ public class BoardDTO {
     private String boardContents;
     private String createdAt;
     private int boardHits;
+
+    private MultipartFile boardFile;
+    private int fileAttached;
+    private String originalFileName;
+    private String storedFileName;
 
     public static BoardDTO toDTO(BoardEntity boardEntity) {
         BoardDTO boardDTO = new BoardDTO();
@@ -47,6 +53,14 @@ public class BoardDTO {
 //                .createdAt(UtilClass.dateTimeFormat(boardEntity.getCreatedAt()))
 //                .build();
 
+        // 파일 첨부 여부에 따라 파일이름 가져가기
+        if (boardEntity.getFileAttached() ==1){ // 파일이 있을 경우
+            boardDTO.setOriginalFileName(boardEntity.getBoardFileEntityList().get(0).getOriginalFileName());
+            boardDTO.setStoredFileName(boardEntity.getBoardFileEntityList().get(0).getStoredFileName());
+            boardDTO.setFileAttached(1);
+        }else {
+            boardDTO.setFileAttached(0);
+        }
         return boardDTO;
     }
 }
