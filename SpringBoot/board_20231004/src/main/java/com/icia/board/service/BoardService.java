@@ -30,15 +30,26 @@ public class BoardService {
         return boardRepository.save(boardEntity).getId();
     }
 
-    public Page<BoardDTO> findAll(int page) {
+    public Page<BoardDTO> findAll(int page, String type, String q) {
         // 페이지 번호를 0부터 시작하도록 조정합니다.
         page = page - 1;
 
         // 페이지당 항목 수를 정의합니다.
         int pageLimit = 5;
 
-        // 게시판 엔티티를 페이지네이션하여 가져옵니다.
-        Page<BoardEntity> boardEntities = boardRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id")));
+        Page<BoardEntity> boardEntities = null;
+        // 검색인지 구분
+        if (q.equals("")) {
+            // 일반 페이징
+            boardEntities = boardRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id")));
+        } else {
+            if (type.equals("boardTitle")) {
+                boardEntities = boardRepository.findByBoardTitleContaining(q, PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id")));
+            } else if (type.equals("boardWriter")) {
+                boardEntities = boardRepository.findByBoardWriterContaining(q, PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id")));
+            }
+        }
+
 
         // 게시판 엔티티를 게시판 데이터 전송 객체(DTO)로 변환합니다.
         Page<BoardDTO> boardList = boardEntities.map(boardEntity ->
