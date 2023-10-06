@@ -29,7 +29,7 @@ public class BoardService {
     private final BoardFileRepository boardFileRepository;
 
     public Long save(BoardDTO boardDTO) throws IOException {
-        if (boardDTO.getBoardFile().isEmpty()) {
+        if (boardDTO.getBoardFile().get(0).isEmpty()) {
             // 첨부파일 없음
             BoardEntity boardEntity = BoardEntity.toSaveEntity(boardDTO);
             return boardRepository.save(boardEntity).getId();
@@ -39,32 +39,29 @@ public class BoardService {
             // 게시글 저장처리 후 저장한 엔티티 가져옴
             BoardEntity savedEntity = boardRepository.save(boardEntity);
             // 파일 이름 처리, 파일 로컬에 저장 등
-            // DTO에 담긴 파일 꺼내기
-            MultipartFile boardFile = boardDTO.getBoardFile();
-            // 업로드한 파일 이름
-            String originalFilename = boardFile.getOriginalFilename();
-            // 저장용 파일 이름
-            String storedFileName = System.currentTimeMillis() + "_" + originalFilename;
-            // 저장경로+파일이름 준비
-            String savePath = "D:\\springboot_img\\" + storedFileName;
-            // 파일 폴더에 저장
-            boardFile.transferTo(new File(savePath));
-            // 파일 정보 board_file_table에 저장
-            // 파일 정보 저장을 위한 BoardFileEntity 생성
-            BoardFileEntity boardFileEntity =
-                    BoardFileEntity.toSaveBoardFile(savedEntity, originalFilename, storedFileName);
-            boardFileRepository.save(boardFileEntity);
+            // DTO에 담긴 파일리스트 꺼내기
+            for (MultipartFile boardFile: boardDTO.getBoardFile()) {
+                // 업로드한 파일 이름
+                String originalFilename = boardFile.getOriginalFilename();
+                // 저장용 파일 이름
+                String storedFileName = System.currentTimeMillis() + "_" + originalFilename;
+                // 저장경로+파일이름 준비
+                String savePath = "D:\\springboot_img\\" + storedFileName;
+                // 파일 폴더에 저장
+                boardFile.transferTo(new File(savePath));
+                // 파일 정보 board_file_table에 저장
+                // 파일 정보 저장을 위한 BoardFileEntity 생성
+                BoardFileEntity boardFileEntity =
+                        BoardFileEntity.toSaveBoardFile(savedEntity, originalFilename, storedFileName);
+                boardFileRepository.save(boardFileEntity);
+            }
             return savedEntity.getId();
         }
     }
 
     public Page<BoardDTO> findAll(int page, String type, String q) {
-        // 페이지 번호를 0부터 시작하도록 조정합니다.
         page = page - 1;
-
-        // 페이지당 항목 수를 정의합니다.
         int pageLimit = 5;
-
         Page<BoardEntity> boardEntities = null;
         // 검색인지 구분
         if (q.equals("")) {
@@ -78,8 +75,6 @@ public class BoardService {
             }
         }
 
-
-        // 게시판 엔티티를 게시판 데이터 전송 객체(DTO)로 변환합니다.
         Page<BoardDTO> boardList = boardEntities.map(boardEntity ->
                 BoardDTO.builder()
                         .id(boardEntity.getId())
@@ -88,8 +83,6 @@ public class BoardService {
                         .boardHits(boardEntity.getBoardHits())
                         .createdAt(UtilClass.dateTimeFormat(boardEntity.getCreatedAt()))
                         .build());
-
-        // 변환된 게시판 데이터 전송 객체를 반환합니다.
         return boardList;
     }
 
